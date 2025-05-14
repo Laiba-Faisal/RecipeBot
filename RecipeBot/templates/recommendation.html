@@ -1,0 +1,85 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommendations</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #375591, #729DC0);
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove default margin for full-page gradient */
+        }
+        .recipe-card {
+            margin: 20px;
+            padding: 20px;
+            background-color: #FFFFFF;
+            color: #000000;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .recipe-header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4D7EB8;
+        }
+
+        .recipe-details {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .recipe-instructions {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .speak-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #2270E2;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Recommendations:</h2>
+    <div>
+        {% for _, recipe in recommendations.iterrows() %}
+            <div class="recipe-card">
+                <button class="speak-button" onclick="speakText('{{ recipe.Instructions|replace("'", "\\'") }}')">Speak</button>
+                <div class="recipe-header">{{ recipe.RecipeName }}</div>
+                <div class="recipe-details">
+                    <p>Ingredients: {{ recipe.Ingredients }}</p>
+                    <p>Prep Time: {{ recipe.PrepTimeInMins }} mins</p>
+                    <p>Cook Time: {{ recipe.CookTimeInMins }} mins</p>
+                    <p>Total Time: {{ recipe.TotalTimeInMins }} mins</p>
+                    <p>Servings: {{ recipe.Servings }}</p>
+                    <p>Cuisine: {{ recipe.Cuisine }}</p>
+                    <p>Course: {{ recipe.Course }}</p>
+                    <p>Diet: {{ recipe.Diet }}</p>
+                </div>
+                <div class="recipe-instructions">
+                    <h3>Instructions:</h3>
+                    <p>{{ recipe.Instructions }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function speakText(text) {
+            var msg = new SpeechSynthesisUtterance();
+            msg.text = text;
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>

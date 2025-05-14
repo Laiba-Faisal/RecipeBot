@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Recipe Recommendations</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #332153;
+  }
+
+  .content-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    background-color: white;
+  }
+
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .homepage-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .welcome-message {
+    flex: 1;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #F5F5F5;
+  }
+
+  .welcome-message h2 {
+    font-size: 2rem;
+    color: #4D7FBC;
+    margin-bottom: 10px;
+  }
+
+  .welcome-message p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  .content-container2 {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    background-color: white;
+  }
+
+  .image-container2 {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .homepage-image2
+  {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .welcome-message2{
+    flex: 1;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #F5F5F5;
+  }
+
+  .welcome-message2 h2 {
+    font-size: 2rem;
+    color: #4D7FBC;
+    margin-bottom: 10px;
+  }
+
+  .welcome-message2 p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  .search-container {
+    position: absolute;
+    top: 90%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    border: 2px solid #5B88EA;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: white;
+  }
+
+  .search-box {
+    flex: 1;
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  .search-box:hover {
+    border-color: #5B88EA;
+  }
+
+  .search-button {
+    border: none;
+    padding: 8px 15px;
+    background-color: #5B88EA;
+    color: purple;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .search-button:hover {
+    background-color: #4a78d6;
+  }
+
+    /* Chatbot response container styles */
+  .chatbot-response-container {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    max-width: 80%;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  .chatbot-response-content {
+    font-size: 1rem;
+    color: #4D7EB8;
+    text-align: left;
+  }
+
+  .show-chatbot-response {
+    /* Remove this class */
+    display: none;
+  }
+</style>
+</head>
+<body>
+ <div class="content-container">
+    <div class="image-container">
+      <img src="https://i.postimg.cc/wjJCZXPr/Dream-Shaper-v7-A-whimsical-cartoonstyle-image-of-a-chef-holdin-0.jpg" alt="Delicious Dish" class="homepage-image">
+    </div>
+    <div class="welcome-message">
+      <h2>Welcome to Flavorverse, <br> your gateway to culinary excellence! </h2>
+      <p>Dive into a world of delectable delights and gastronomic adventures. Unleash your inner chef and embark on a journey that tantalizes your taste buds, sparks creativity, and brings joy to your kitchen. From personalized AI recommendations to augmented reality cooking experiences, Flavorverse is here to redefine your culinary exploration. Let's embark on this flavorful journey together!<br><br><br>
+          <b>Recipe Recommendations</b> <br>
+    Discover a curated selection of recipes tailored to your preferences, ranging from cuisines to dietary needs.
+<br><br><b>Voice-Controlled Assistance</b> <br>
+    Discover a curated selection of recipes tailored to your preferences, ranging from cuisines to dietary needs.
+<br><br><b>Augmented Reality Cooking</b> <br>
+Immerse yourself in the future of cooking with interactive augmented reality experiences that guide you through each step.
+</p>
+    </div>
+  </div>
+
+  </div>
+  <div class="search-container">
+  <form method="POST" action="/recommendations">
+    <input type="text" name="query" class="search-input" placeholder="Search...">
+    <input type="number" name="num_recommendations" class="recommendation-input" placeholder="Number of Recommendations">
+    <input type="submit" value="Get Recommendations" class="search-button">
+  </form>
+</div>
+
+<div class="show-chatbot-response">
+    <button class="show-response-button">Show Chatbot Response</button>
+  </div>
+
+ <!-- Chatbot response container -->
+<div class="chatbot-response-container">
+    <div class="chatbot-response-content" id="chatbot-response-content">
+        {% if chat_response %}
+            {{ chat_response }}
+        {% else %}
+            No chatbot response yet.
+        {% endif %}
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
